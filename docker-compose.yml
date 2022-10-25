@@ -222,3 +222,18 @@ services:
         - "${ELASTICSEARCH_PORT}:9200"
       networks:
         - backend
+
+### Xxl-job ################################################
+  xxl-job:
+    image: xuxueli/xxl-job-admin:${XXL_JOB_VERSION}
+    env_file:
+      - ./xxl-job/xxl-job.env
+    volumes:
+      - ./xxl-job/logs:/data/applogs
+    ports:
+      - "${XXL_JOB_PORT}:8080"
+    networks:
+      - backend
+    depends_on:
+      - mysql
+    restart: always
